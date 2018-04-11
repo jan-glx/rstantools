@@ -3,7 +3,8 @@ context("rstan_package_skeleton")
 if (requireNamespace("rstan", quietly = TRUE)) { # FIXME when travis can install rstan again
   rstan_package_skeleton(
     path = file.path(tempdir(),"testPackage"),
-    stan_files = test_path("test.stan")
+    stan_files = test_path("test.stan"),
+    travis = TRUE
   )
   pkg_path <- file.path(tempdir(), "testPackage")
   pkg_files <- list.files(pkg_path, recursive = TRUE, all.files = TRUE)
@@ -21,13 +22,15 @@ if (requireNamespace("rstan", quietly = TRUE)) { # FIXME when travis can install
   })
   test_that(".travis.yml file included", {
     expect_true(".travis.yml" %in% pkg_files)
-
     travis <- readLines(file.path(pkg_path, ".travis.yml"))
     expect_false(any(grepl("rstanarm", travis)))
     expect_true(any(grepl("testPackage", travis)))
   })
   test_that(".Rbuildignore file included", {
     expect_true(".Rbuildignore" %in% pkg_files)
+  })
+  test_that("meta_header.hpp in correct place", {
+    expect_true(file.exists(file.path(pkg_path, "inst", "include", "meta_header.hpp")))
   })
   test_that(".stan file included", {
     expect_true("src/stan_files/test.stan" %in% pkg_files)

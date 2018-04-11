@@ -5,7 +5,7 @@
 \title{Create the skeleton of a new \R package with Stan programs}
 \usage{
 rstan_package_skeleton(path, fields = getOption("devtools.desc"),
-  rstudio = TRUE, open = TRUE, stan_files = character(), travis = TRUE)
+  rstudio = TRUE, open = TRUE, stan_files = character(), travis = FALSE)
 }
 \arguments{
 \item{path}{A relative or absolute path to the new package to be created
@@ -13,16 +13,16 @@ rstan_package_skeleton(path, fields = getOption("devtools.desc"),
 
 \item{fields, rstudio, open}{See \code{usethis::create_package}.}
 
-\item{stan_files}{A character vector with paths to \code{.stan} files to
-include in the package (these files will be included in the
+\item{stan_files}{Optionally, a character vector with paths to \code{.stan}
+files to include in the package (these files will be included in the
 \code{src/stan_files} directory). If not specified then the \code{.stan}
 files for the package can be manually placed into the appropriate directory
 later.}
 
-\item{travis}{Should a \code{.travis.yml} file be added to the package
-directory? Defaults to \code{TRUE}. The file has some settings already set
-to help with compilation issues, but we do not guarantee that it will work
-on \href{https://travis-ci.org/}{travis-ci} without manual adjustments.}
+\item{travis}{Optionally, should a \code{.travis.yml} file be added to the
+package directory? The file has some settings already set to help with
+compilation issues, but we do not guarantee that it will work on
+\href{https://travis-ci.org/}{travis-ci} without manual adjustments.}
 }
 \description{
 \if{html}{\figure{stanlogo.png}{options: width="50px" alt="http://mc-stan.org/about/logo/"}}
