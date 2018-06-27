@@ -168,7 +168,7 @@ rstan_package_skeleton <-
     file.remove(file.path(DIR, "R", "stanmodels.R.bak"))
     cat(
       '.onLoad <- function(libname, pkgname) {',
-      '  modules <- paste0("stan_fit4", names(stanmodels), "_mod")',
+      '  modules <- sprintf("stan_fit4%s_mod", names(stanmodels))',
       '  for (m in modules) loadModule(m, what = TRUE)',
       '}',
       file = file.path(DIR, "R", "zzz.R"),
